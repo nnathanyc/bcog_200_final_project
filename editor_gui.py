@@ -20,6 +20,12 @@ app = customtkinter.CTk()
 app.geometry("1920x1080")
 app.title("Film Filter Application")
 
+#Background image for theme
+
+custom_background = Image.open("your_wallpaper.jpg")  # Replace with your image file
+custom_background = custom_background.resize((1920, 1080), Image.ANTIALIAS)
+bg_photo = ImageTk.PhotoImage(custom_background)
+
 
 #Function to upload image
 
