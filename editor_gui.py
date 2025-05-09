@@ -50,7 +50,30 @@ class FilmEditorApp:
 
         if file_path:
             self.photo = Photo(file_path)
-            
+            self.photo.show_image(self.root)
+            self.save_btn.configure(state=tk.NORMAL)
+
+    #function to save image
+    def save_image(self):
+        if self.photo:
+            self.photo.save_image()
+
+    #Photo class (preview display and border)
+
+    class Photo:
+        def __init__(self, file_path):
+            self.filepath = file_path
+            self.image = Image.open(file_path)
+            self.photo = None
+
+        #preview function
+        def show_image(self, parent_frame):
+            self.image.thumbnail((550, 550)) #preview size
+            self.photo = ImageTk.PhotoImage(self.image)
+
+        #creating thin border around preview
+        
+
         
 
     
