@@ -26,6 +26,9 @@ class Photo:
 
     #preview function
     def show_image(self, parent_frame):
+        
+        self.parent_frame = parent_frame 
+
         self.image.thumbnail((550, 550)) #preview size
         self.photo = ImageTk.PhotoImage(self.image)
 
@@ -42,6 +45,31 @@ class Photo:
 
         # Keep a reference to avoid garbage collection
         image_canvas.image = self.photo
+
+        # function for buttons under the preview (going to be assigned to different luts and filters)
+        self.circle_filter_buttons()
+
+    #Function used to create three buttons under preview of the photo
+    
+    def circle_filter_buttons(self):
+        button_frame = customtkinter.CTkFrame(self.parent_frame)
+        button_frame.pack(pady=10)
+
+        #code for the first button (soft light filter)
+        button_1 = customtkinter.CTkButton(button_frame, text = "soft light", command=self.placeholder_action)
+        button_1.pack(side=tk.LEFT,padx=10)
+
+        #code for the second button (film aesthetic filter)
+        button_2 = customtkinter.CTkButton(button_frame, text = "film aesthetic", command=self.placeholder_action)
+        button_2.pack(side=tk.LEFT,padx=10)
+
+        #code for the third button (custom aesthetic filter for now)
+        button_2 = customtkinter.CTkButton(button_frame, text = "custom aesthetic", command=self.placeholder_action)
+        button_2.pack(side=tk.LEFT,padx=10)
+
+    def placeholder_action(self):
+        # Placeholder function for button actions
+        pass
 
     def save_image(self):
         save_path = filedialog.asksaveasfilename(defaultextension=".jpg", filetypes=[("JPEG files", "*.jpg *.jpeg")])
