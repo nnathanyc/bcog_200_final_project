@@ -119,6 +119,10 @@ class FilmEditorApp:
         if self.photo:
             self.photo.save_image()
 
+    
+    #function to apply lut(cubefile) photos
+    
+
 
 # main loop to launch the GUI
 if __name__ == "__main__":
