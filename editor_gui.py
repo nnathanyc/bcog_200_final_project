@@ -1,3 +1,11 @@
+#MAIN APP
+#Main application file
+#Will contain all the elements that are needed to execute the process of altering the photo
+#load the image
+#analyze each pixel of the image, and change accordingly to the LUT file
+#display and show the option to save the final image
+
+#CUSTOM UI
 # This will be the file for the image editor GUI
 # Contents for the GUI will include a home page, containing brief instructions 
 # will also have a button on the bottom that says "open image"
@@ -25,7 +33,7 @@ class Photo:
         self.filepath = file_path
         self.original_image = Image.open(file_path)
         self.image = self.original_image.copy()  # Start with a copy of the original
-        self.original_size = self.image.size  # Make sure that user downloads in their native resolution
+        self.original_size = self.image.size  # Makes sure that user downloads photo in their native resolution
         self.photo = None
 
     # Preview function
@@ -63,9 +71,9 @@ class Photo:
         img = self.original_image.copy()
 
         # Apply stronger Gaussian blur
-        img = img.filter(ImageFilter.GaussianBlur(radius=4))
+        img = img.filter(ImageFilter.GaussianBlur(radius=2.5))
 
-        # Increase brightness
+        # Increase brightness slightly
         enhance_brightness = ImageEnhance.Brightness(img)
         img = enhance_brightness.enhance(1.3)
 
@@ -95,8 +103,8 @@ class Photo:
 
         # Increase warmth in photo, boosting red colors and reducing sharp blues
         r, g, b = img.split()
-        r = r.point(lambda i: min(255, i + 15))  # Boost red
-        b = b.point(lambda i: max(0, i - 10))    # Reduce blue
+        r = r.point(lambda i: min(255, i + 15)) #red modification 
+        b = b.point(lambda i: max(0, i - 10))    #blue modification
         img = Image.merge("RGB", (r, g, b))
 
         # reduce contrast to make it look more washed and faded
@@ -119,31 +127,30 @@ class Photo:
         button_2 = customtkinter.CTkButton(button_frame, text="Washed Film", command=self.apply_grainyfilm)
         button_2.pack(side=tk.LEFT, padx=10)
 
-        # Code for the third button (custom aesthetic filter for now)
+        # Code for the third button (custom aesthetic filter for now) - now monotone filter
         button_3 = customtkinter.CTkButton(button_frame, text="Monotone Film", command=self.monotone_film)
         button_3.pack(side=tk.LEFT, padx=10)
 
     def monotone_film(self):
-        # Reset the image to the original before applying the custom TV-style filter
-        img = self.original_image.copy().convert("L")  # Convert to grayscale
+        img = self.original_image.copy().convert("L")  #grayscale conversion
 
         np_img = np.array(img).astype(np.int16)
 
-        # Strong grain/noise like early television
+        # adding strong noise and grain to photo to replicate vintage look
         grain = np.random.normal(loc=0, scale=35, size=np_img.shape).astype(np.int16)
         noisy_img = np.clip(np_img + grain, 0, 255).astype(np.uint8)
 
-        img = Image.fromarray(noisy_img).convert("RGB")  # Back to RGB for Tkinter compatibility
+        img = Image.fromarray(noisy_img).convert("RGB")  
 
-        # Slightly reduce brightness
+        # reducing brightness by 1.1x
         brightness = ImageEnhance.Brightness(img)
         img = brightness.enhance(0.9)
 
-        # Reduce contrast for a flat, old video effect
+        # Reduce contrast by 1.2x
         contrast = ImageEnhance.Contrast(img)
         img = contrast.enhance(0.8)
 
-        # Apply a small blur to simulate analog softness
+        # gaussian blur to add distortion
         img = img.filter(ImageFilter.GaussianBlur(radius=1))
 
         self.image = img
