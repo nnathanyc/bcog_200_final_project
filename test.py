@@ -1,7 +1,17 @@
-#Was the file used to test differnt features and experiment freely. 
-#now finalized as another copy of my final GUI
+#MAIN APP
+#Main application file
+#Will contain all the elements that are needed to execute the process of altering the photo
+#load the image
+#analyze each pixel of the image, and change accordingly to the LUT file
+#display and show the option to save the final image
 
-
+#CUSTOM UI
+# This will be the file for the image editor GUI
+# Contents for the GUI will include a home page, containing brief instructions 
+# will also have a button on the bottom that says "open image"
+# after the process, there will be a button that gives the user an option to save the photo
+# files that will be supported will be jpg and jpeg files from the user. 
+# will strive to make the UI as modern as possible, while keeping it minimalistic
 
 import tkinter as tk
 from tkinter import filedialog
@@ -61,11 +71,11 @@ class Photo:
         img = self.original_image.copy()
 
         # Apply stronger Gaussian blur
-        img = img.filter(ImageFilter.GaussianBlur(radius=2.5))
+        img = img.filter(ImageFilter.GaussianBlur(radius=2.0))
 
         # Increase brightness slightly
         enhance_brightness = ImageEnhance.Brightness(img)
-        img = enhance_brightness.enhance(1.3)
+        img = enhance_brightness.enhance(1.1)
 
         # Slightly soften contrast for a dreamier look
         contrast_enhancer = ImageEnhance.Contrast(img)
@@ -158,13 +168,13 @@ class FilmEditorApp:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1080x720")
-        self.root.title("Film Filter App")
+        self.root.title("Film Filter App!")
         self.photo = None
 
         # background image hard-coded from project folder
         background_path = os.path.join(os.path.dirname(__file__), "background.jpg")
         background_image = Image.open(background_path).resize((1920, 1080), Image.LANCZOS)
-        self.background_photo = ImageTk.PhotoImage(background_image)  # <-- fixed syntax here
+        self.background_photo = ImageTk.PhotoImage(background_image)  
 
         # Use a label to place background image
         self.background_label = tk.Label(self.root, image=self.background_photo)
@@ -179,7 +189,7 @@ class FilmEditorApp:
     def create_widgets(self):
         # Title and brief introduction to the program
         title_font = customtkinter.CTkFont(family="Helvetica", size=20, weight="bold")
-        title = customtkinter.CTkLabel(self.widget_frame, text="Film Filter Aesthetic Application", font=title_font)
+        title = customtkinter.CTkLabel(self.widget_frame, text="Quick Filter Tool", font=title_font)
         title.pack(padx=10, pady=10)
 
         # Brief instructions
