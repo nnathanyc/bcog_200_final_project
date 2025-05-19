@@ -20,4 +20,20 @@ FINAL APP
 4) Ensured Native Resolution was kept intact
 5) Custom UI designed by CustomTkinter - Strived for friendly UI/UX Design
 
+INSTRUCTIONS
+Complete List of Additional Libraries to download!!
+
+1) tkinter
+2) customtkinter (pip3 install customtkinter)
+3) Pillow
+4) numpy
+
+Instructions
+
+1) Run the editor_gui.py script
+2) Upload an image of choice 
+3) Apply any of the three designated filters available in the application
+4) Save the file with a desired name!
+5) Quit application when finished!
+
 Difficulties: I initially wanted to use LUT's (Lookup Tables) and XMP's to accurately replicate my presents in Adobe Lightroom, however there were way too many formatting issues because LUT's tend to require a very parrallel color structure in order to work. I left the files in the folder for reference - but they don't provide a function to my program. Instead, I used built-in python libraries to manually tweak the styling elements of images. 
