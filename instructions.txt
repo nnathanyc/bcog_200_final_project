@@ -1,0 +1,14 @@
+Complete List of Additional Libraries to download!!
+
+1) tkinter
+2) customtkinter (pip3 install customtkinter)
+3) Pillow
+4) numpy
+
+Instructions
+
+1) Run the editor_gui.py script
+2) Upload an image of choice 
+3) Apply any of the three designated filters available in the application
+4) Save the file with a desired name!
+5) Quit application when finished!
